@@ -1,8 +1,15 @@
 require 'twitter'
 require 'dotenv'
+require 'redis'
 
 # .envから環境変数をロード
 Dotenv.load
+
+# Redisをセットアップ
+redis = Redis.new
+
+# 前回の履歴を取得
+last_tweet = redis.get 'last_tweet'
 
 # Twitterにログイン
 client = Twitter::REST::Client.new do |config|
