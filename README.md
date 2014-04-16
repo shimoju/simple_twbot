@@ -1,4 +1,3 @@
-simple_twbot
-============
+# SimpleTwbot
 
 Simple Twitter Bot
