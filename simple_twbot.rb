@@ -10,7 +10,11 @@ Dotenv.load
 tweets = YAML.load_file 'tweets.yml'
 
 # Redisをセットアップ
-redis = Redis.new
+if ENV['REDISTOGO_URL']
+    redis = Redis.new(url: ENV['REDISTOGO_URL'])
+else
+    redis = Redis.new
+end
 
 # 前回の履歴を取得
 last_tweet = redis.get 'last_tweet'
