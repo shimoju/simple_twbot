@@ -1,9 +1,13 @@
 require 'twitter'
 require 'dotenv'
+require 'yaml'
 require 'redis'
 
 # .envから環境変数をロード
 Dotenv.load
+
+# ツイートリストを読み込み
+tweets = YAML.load_file 'tweets.yml'
 
 # Redisをセットアップ
 redis = Redis.new
