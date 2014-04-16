@@ -22,3 +22,14 @@ client = Twitter::REST::Client.new do |config|
   config.access_token  = ENV['ACCESS_TOKEN']
   config.access_token_secret = ENV['ACCESS_TOKEN_SECRET']
 end
+
+# ツイートして履歴をRedisにセット
+if last_tweet && tweets[last_tweet.to_i + 1]
+  client.update(tweets[last_tweet.to_i + 1])
+  redis.incr 'last_tweet'
+else
+  client.update(tweets.first)
+  redis.set 'last_tweet', 0
+end
+
+puts "Tweet."
